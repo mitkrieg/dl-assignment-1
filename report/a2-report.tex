@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{enumitem}
+
+\input{header}
+
+
+\title{CS5787: Exercises 1 \\ \begin{small}\url{FULL_CODE_FOLDER_URL}\end{small}}
+\author{Mitchell Krieger \\ mak483 \and \textbf{Full Name} \\ Net ID}
+
+\date{}
+
+\colmfinalcopy
+\begin{document}
+\maketitle
+
+\section{Theory: Question 1 [12.5 pts]}
+
+\begin{enumerate}[label=\alph*)]
+    \item What is the input $X$? \\ There are $m$ samples in the batch with 10 features each so the input shape is $(m, 10)$ 
+    \item What is the shape of the hidden layer's weight vector $W_h$, and the shape of its bias vector $b_h$? \\ To transform an $(m, 10)$ input into a hidden layer of 50 neurons we need a shape $W_h$ to have a shape of $(10, 50)$ so that we get a $(m, 50)$ result. After the weight matrix is applied, we then add the bias $b_h$ to each row of $W_h$, which means that the result needs to be $(1, 50)$
+    \item What is the shape of the output layer's weight vector $W_o$, and its bias vector $b_o$? $W_h: (50, 3), b_h: (1, 3)$
+    \item What is the shape of the network's output matrix $Y$? $(m, 3)$
+    \item Write an equation that computes the network's output matrix $Y$ as a function of $X$, $W_h$, $b_h$, $W_o$, and $b_o$?
+    
+          $Y = W_oa(W_hX+b_h)+b_o$ 
+
+          Where $a$ is the ReLU activation funciton, $a(x) = \max(0,x)$.
+\end{enumerate}
+
+\section{Theory: Question 2 [12.5 pts]}
+
+For the first layer there are 3x3x3 parameters in each of the 100 kernels, and then we need bias parameters for each kernel as well. This totals 3x3x3x100 + 100 = 2800 parameters.
+In the second layer there are 3x3x100 parameters in each of the 200 kernels, and then we need bias parameters for each kernel as well. This totals 3x3x100x200 + 200 = 180200.
+In the final layer there are 3x3x200 parameters in each of the 200 kernels, and then we need bias parameters for each kernel as well. This totals 3x3x200x400 + 400 = 720400.
+Adding all the layers together we get 2800 + 180200 + 720400 = 903400 total parameters.
+
+\section{Theory: Question 3 [25 pts]}
+\todo{Provide your answers to Question 3 here.}
+
+\section{Practical [50 pts]}
+\todo{Provide a report detailing your experiments, results and discussion in this section.}
+
+
+
+
+\end{document}
