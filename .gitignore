@@ -167,3 +167,7 @@ cython_debug/
 *.fls
 *.out
 *.synctex.gz
+
+#wandb
+wandb/
+canvasdata/

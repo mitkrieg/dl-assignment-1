@@ -37,19 +37,50 @@ Adding all the layers together we get 2800 + 180200 + 720400 = 903400 total para
 \section{Theory: Question 3 [25 pts]}
 
 \begin{enumerate}[label=\alph*.]
-    \item $\frac{\partial f}{\partial \gamma} = \frac{\partial f}{\partial y} \frac{\partial y}{\partial \gamma} = \frac{\partial f}{\partial y} \widehat{x_i}$
-    \item $\frac{\partial f}{\partial \beta} = \frac{\partial f}{\partial y} \frac{\partial y}{\partial \beta} = \frac{\partial f}{\partial y}$
-    \item $\frac{\partial f}{\partial \widehat{x_i}} = \frac{\partial f}{\partial y} \frac{\partial y}{\partial \widehat{x_i}} = \frac{\partial f}{\partial y} \gamma$
-    \item $\frac{\partial f}{\partial \sigma^2} = \frac{\partial f}{\partial y} \frac{\partial y}{\partial \widehat{x_i}} \frac{\partial \widehat{x_i}}{\partial \sigma^2} =  \frac{\partial f}{\partial y} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}}$
-    \item $\frac{\partial f}{\partial \mu} = \frac{\partial f}{\partial y} \frac{\partial y}{\partial \widehat{x_i}} \frac{\partial \widehat{x_i}}{\partial \mu} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial \widehat{x_i}} \frac{\partial \widehat{x_i}}{\partial \sigma^2} \frac{\partial \sigma^2}{\partial \mu} = \frac{\partial f}{\partial y} \gamma \frac{-1}{\sqrt{(\sigma^2+\epsilon)^3}}+\frac{\partial f}{\partial y} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{-2}{m} \sum_{i=1}^{m}(x_i - \mu)$
+    \item
+    \begin{equation*}
+        \begin{aligned}
+            \frac{\partial f}{\partial \gamma} &= \frac{\partial f}{\partial y_i} \frac{\partial y_i}{\partial \gamma} \\
+            &= \sum_{i=i}^{m}\frac{\partial f}{\partial y_i} \widehat{x_i}
+        \end{aligned}
+    \end{equation*}
+    \item        
+    \begin{equation*}
+        \begin{aligned}
+            \frac{\partial f}{\partial \beta} &= \frac{\partial f}{\partial y_i} \frac{\partial y_i}{\partial \beta} \\
+            &= \sum_{i=i}^{m}\frac{\partial f}{\partial y_i}
+        \end{aligned}
+    \end{equation*}  
+    \item        
+    \begin{equation*}
+        \begin{aligned}
+            \frac{\partial f}{\partial \widehat{x_i}} &= \frac{\partial f}{\partial y_i} \frac{\partial y_i}{\partial \widehat{x_i}} \\
+            &= \frac{\partial f}{\partial y_i} \gamma
+        \end{aligned}
+    \end{equation*}  
+    \item 
+    \begin{equation*}
+        \begin{aligned}
+            \frac{\partial f}{\partial \sigma^2} &= \frac{\partial f}{\partial y_i} \frac{\partial y_i}{\partial \widehat{x_i}} \frac{\partial \widehat{x_i}}{\partial \sigma^2} \\
+            &=  \sum_{i=i}^{m}\frac{\partial f}{\partial y_i} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}}
+        \end{aligned}
+    \end{equation*}  
+    \item 
+    \begin{equation*}
+        \begin{aligned}
+            \frac{\partial f}{\partial \mu} &= \frac{\partial f}{\partial y_i} \frac{\partial y_i}{\partial \widehat{x_i}} \frac{\partial \widehat{x_i}}{\partial \mu} + \frac{\partial f}{\partial y_i} \frac{\partial y_i}{\partial \widehat{x_i}} \frac{\partial \widehat{x_i}}{\partial \sigma^2} \frac{\partial \sigma^2}{\partial \mu} \\
+            &= \sum_{i=i}^{m}\frac{\partial f}{\partial y_i} \gamma \frac{-1}{\sqrt{(\sigma^2+\epsilon)}} \\
+            &\quad+ \sum_{i=i}^{m}\frac{\partial f}{\partial y_i} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{-2}{m} \sum_{i=1}^{m}(x_i - \mu) 
+        \end{aligned}
+    \end{equation*}  
     \item
     \begin{equation*}
         \begin{aligned}
             \frac{\partial f}{\partial x_i} &= \frac{\partial f}{\partial \widehat{x_i}} \frac{\partial \widehat{x_i}}{\partial x_i} + \frac{\partial f}{\partial \sigma^2} \frac{\partial \sigma^2}{\partial x_i} + \frac{\partial f}{\partial \mu} \frac{\partial \mu}{\partial x_i} \\
-            \frac{\partial f}{\partial x_i} &= \frac{\partial f}{\partial y} \gamma \frac{1}{\sqrt{(\sigma^2+\epsilon)^3}} \\
-            &\quad+ \frac{\partial f}{\partial y} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{2}{m}(x_i-\mu) \\
-            &\quad+ \frac{\partial f}{\partial y} \gamma \frac{-1}{\sqrt{(\sigma^2+\epsilon)^3}} \\
-            &\quad+ \frac{\partial f}{\partial y} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{-2}{m} \sum_{i=1}^{m}(x_i - \mu) \frac{1}{m}
+            \frac{\partial f}{\partial x_i} &= \frac{\partial f}{\partial y_i} \gamma \frac{1}{\sqrt{(\sigma^2+\epsilon)^3}} \\
+            &\quad+ \frac{\partial f}{\partial y_i} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{2}{m}(x_i-\mu) \\
+            &\quad+ \frac{\partial f}{\partial y_i} \gamma \frac{-1}{\sqrt{(\sigma^2+\epsilon)^3}} \\
+            &\quad+ \frac{\partial f}{\partial y_i} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{-2}{m} \sum_{i=1}^{m}(x_i - \mu) \frac{1}{m}
         \end{aligned}
     \end{equation*}
 \end{enumerate}
