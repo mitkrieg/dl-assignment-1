@@ -28,9 +28,30 @@ If cuda or mps is available to train models on GPUs, the notebook will attempt t
 
 ### Data
 
-For this assignment we are using the Fashion MNIST dataset. Running the first cell will download the data using `wget`. After that the `FashionMNISTDataset` pytorch Dataset will handle loading the data into tensors and can retrieve data like any pytorch dataset can. In addition, a utility function `show_img` is provided to display any given sample given its index. 
+For this assignment we are using the Fashion MNIST dataset. Running the first cell will download the data using `wget` to the `data` directory. After that the `FashionMNISTDataset` pytorch Dataset will handle loading the data into tensors and can retrieve data like any pytorch dataset can. In addition, a utility function `show_img` is provided to display any given sample given its index. 
+
+```python
+gen = torch.Generator().manual_seed(123)
+
+train = FasionMNISTDataset(PATH, 'train', device=device)
+train, val = torch.utils.data.random_split(train, [0.8, 0.2], generator=gen)
+test = FasionMNISTDataset(PATH, 'test', device=device)
+```
 
 There are 3 dataloaders created from the dataset for training, validation and testing purposes. The validation set comes from a 80/20 split of the training set. Each data loader is randomly suffled with a generator that sets the seed to make the results reproduceable. Dataloader objects for train, validation and test are all contained in a dictionary called `dataloaders` for convience (and for use by training and evaluation functions).
+
+```python
+batch = 128
+trainloader = DataLoader(train, batch, shuffle=True, generator=gen)
+valloader = DataLoader(val, batch, shuffle=True, generator=gen)
+testloader = DataLoader(test, batch, shuffle=True, generator=gen)
+
+dataloaders = {
+    'train': trainloader,
+    'val': valloader,
+    'test': testloader
+}
+```
 
 ### Models & Training
 
@@ -52,7 +73,7 @@ In the case above, `best_lenet` contains a dictionary with:
 - `'name'`: a string containing the name of the wandb run logs of the model training
 - `'accuracy'`: a dictionary of the train, validation and testing accuracies
 
-Variants of Lenet5 are provided as child modules of Lenet5:
+Variants of Lenet5 are provided as pytorch child modules of Lenet5:
 - `Lenet5`: Vanilla Lenet5 implementation
 - `Lenet5BN`: Lenet5 with two batch normalization layers added after a convolution but before the ReLU activation function is applied. 
 - `Lenet5Dropout`: Lenet5 with two dropout layers added in after the first and second fully connected layers. This pytorch module expects that at least one value for `dropout` to be in the param grid.
@@ -63,7 +84,26 @@ Variants of Lenet5 are provided as child modules of Lenet5:
 Trained weights have been saved to the `models` directory as `.pt` files using the simple `torch.save()` method. Weights can be loaded for prediction and testing by the following:
 
 ```python
-model = Lenet5(**kwargs)
-model.load_state_dict(torch.load('./models/{model_name}.pt', weights_only=True))
+model = Lenet5(**kwargs) #or any module from above
+model.load_state_dict(torch.load(f'./models/{model_name}.pth', weights_only=True))
 model.eval()
+```
+
+Models can be tested after loading using:
+```
+correct = 0
+total = 0
+
+for images, labels in testloader:
+    outputs = model(images)
+    total += labels.size(0)
+    _, predicted = torch.max(outputs.data, 1)
+    correct += (predicted == labels).sum().item()
+print('correct:', correct)
+print('total:', total)
+print('accuracy:', correct/total)
+print('sample label:', labels[0])
+print('sample prediction:', predicted[0])
+
+plt.imshow(images[0].numpy().reshape(28,28), cmap='gray');
 ```
