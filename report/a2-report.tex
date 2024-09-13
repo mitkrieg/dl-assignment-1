@@ -8,7 +8,7 @@
 
 
 \title{CS5787: Exercises 1 \\ \begin{small}\url{https://github.com/mitkrieg/dl-assignment-1/tree/main}\end{small}}
-\author{Mitchell Krieger \\ mak483 \and \textbf{Meitong (Estelle) He} \\ mh2585}
+\author{Mitchell Krieger \\ mak483 \and \textbf{Meitong He} \\ mh2585 \\ (Dropped Class)}
 \hypersetup{urlbordercolor=blue, linkcolor=blue, colorlinks=true}
 
 \date{September 12, 2024}
@@ -87,7 +87,8 @@ Adding all the layers together we get 2800 + 180200 + 720400 = 903400 total para
             \frac{\partial f}{\partial x_i} &= \frac{\partial f}{\partial \widehat{x_i}}\frac{1}{\sqrt{\sigma^2+\epsilon}} + \frac{\partial f}{\partial \sigma^2}\frac{2}{m}(x_i-\mu) + \frac{1}{m}\frac{\partial f}{\partial \mu}\\
             \frac{\partial f}{\partial x_i} &= \frac{\partial f}{\partial y_i} \gamma \frac{1}{\sqrt{\sigma^2+\epsilon}} \\
             &\quad+ \frac{\partial f}{\partial y_i} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{2}{m}(x_i-\mu) \\
-            &\quad+ \frac{1}{m}(\frac{\partial f}{\partial y_i} \gamma \frac{-1}{\sqrt{(\sigma^2+\epsilon)^3}} + \frac{\partial f}{\partial y_i} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{-2}{m} \sum_{i=1}^{m}(x_i - \mu) )
+            &\quad+ \frac{1}{m}(\sum_{i=i}^{m}\frac{\partial f}{\partial y_i} \gamma \frac{-1}{\sqrt{(\sigma^2+\epsilon)}} 
+            + \sum_{i=i}^{m}\frac{\partial f}{\partial y_i} \gamma \frac{-1}{2} \frac{(x_i-\mu)}{\sqrt{(\sigma^2 + \epsilon)^3}} \frac{-2}{m} \sum_{i=1}^{m}(x_i - \mu) )
         \end{aligned}
     \end{equation*}
 \end{enumerate}
@@ -132,7 +133,7 @@ For this experiment, we tuned hyperparameters via a grid search training over po
     \centering
     \caption{Hyperparameters for Regularization Experiments}
     \label{tab:lenet5}
-    \begin{tabular}{|p{2cm}|p{3cm}|p{2cm}|c|c|c|}
+    \begin{tabular}{|p{1.5cm}|p{4cm}|p{1.5cm}|c|c|c|}
         \hline
         \textbf{Technique}      & \textbf{Description}  & \textbf{Learning Rate}    & \textbf{Momentum}  & \textbf{Test Accuracy} & \textbf{Train Accuracy}\\
         \hline
